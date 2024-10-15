@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Aryan">
+        <meta name="description" content="game">
+        <title>Rock Paper Scissors</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="icon" href="img/scissors-emoji.png">
+    </head>
+    <body onkeydown="keyboardInput(event)">
+        <header>
+            <p class="heading">Rock Paper Scissors</p>
+        </header>
+        <main>
+            <button type="button" class="opt-button js-rock" onclick="main('rock')">
+                <img src="img/rock-emoji.png" class="button-image" alt="rock"/>
+            </button>
+            <button type="button" class="opt-button js-paper" onclick="main('paper')">
+                <img src="img/paper-emoji.png" class="button-image" alt="paper"/>
+            </button>
+            <button type="button" class="opt-button js-scissors" onclick="main('scissors')">
+                <img src="img/scissors-emoji.png" class="button-image" alt="scissors"/>
+            </button>
+            <p class="result js-result"></p>
+            <p class="trial js-trial"></p>
+            <p class="stats js-stats"></p>
+            <script src="scripts/rock-paper-scissors.js"></script>
+            <div class="button-wrapper">
+                <button class="reset-button js-reset-button" onclick="reset()">
+                    Reset Score
+                </button>
+            </div>
+        </main>
+    </body>
+</html>

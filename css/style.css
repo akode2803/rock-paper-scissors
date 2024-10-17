@@ -46,9 +46,9 @@ body {
     border: 0;
     cursor: pointer;
     min-width: 120px;
-    color: white
 }
 .reset{
+    color: white;
     background-color: black;
     min-width: 120px;
 }

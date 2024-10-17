@@ -25,7 +25,14 @@ function keyboardInput(event) {
     }
 }
 
-function generateComputerMove() {
+document.querySelectorAll('.opt-button').forEach(element => {
+    element.addEventListener('click', (event) => {
+        element.classList.add('opt-button-highlight-auto');
+        setTimeout(() => element.classList.remove('opt-button-highlight-auto'), 100);
+    })
+});
+
+function generateMove() {
     const x = Math.random();
     if (x <= 1/3) {
         return "rock";
@@ -36,7 +43,7 @@ function generateComputerMove() {
     }
 }
 
-function getResult(userMove, computerMove = generateComputerMove()) {
+function getResult(userMove, computerMove = generateMove()) {
     let result = '';
     if (computerMove === userMove) result = "tie";
     else if (computerMove === "rock") {
@@ -103,8 +110,8 @@ function reset() {
     return newScore;
 }
 
-const main = function (userMove = generateComputerMove()) {
-    const computerMove = generateComputerMove();
+const main = function (userMove = generateMove()) {
+    const computerMove = generateMove();
     const result = getResult(userMove, computerMove);
     let score = getScore();
 
@@ -120,17 +127,21 @@ const autoplayButtonInit = () => {
     autoplayButton.addEventListener('click', () => {
         if (!playing) {
             interval = autoplay();
-            autoplayButton.innerText = 'Stop Playing';
+            autoplayButton.innerText = 'Stop';
             autoplayButton.classList.add('reset');
         }
         else {
-            autoplayButton.innerText = 'Stop';
+            autoplayButton.innerText = 'Auto Play';
             autoplayButton.classList.remove('reset');
             clearInterval(interval);
         }
         playing = !playing;
         function autoplay() {
-            return setInterval(main, 100);
+            return setInterval(() => {
+                // main(userMove);
+                userMove = generateMove();
+                document.querySelector(`.js-${userMove}`).click();
+            }, 100);
         }
     });
 }

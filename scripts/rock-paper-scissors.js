@@ -10,19 +10,18 @@ const messages = {
     tie : "Tie"
 };
 
+document.body.addEventListener('keydown', keyboardInput);
 function keyboardInput(event) {
-    if (event !== undefined) {
-        const keyPressed = event.key;
-        let choice = '';
-        if (keyPressed === 'r' || keyPressed === 'ArrowLeft') choice = 'rock';
-        else if (keyPressed === 'p'  || keyPressed === 'ArrowUp') choice = 'paper';
-        else if (keyPressed === 's' || keyPressed === 'ArrowRight') choice = 'scissors';
-        if (choice !== '') {
-            main(choice);
-            const option = document.querySelector(`.js-${choice}`);
-            option.classList.add('opt-button-highlight');
-            setTimeout(function () {option.classList.remove('opt-button-highlight')}, 100);
-        }
+    const keyPressed = event.key;
+    let choice = '';
+    if (keyPressed === 'r' || keyPressed === 'ArrowLeft') choice = 'rock';
+    else if (keyPressed === 'p'  || keyPressed === 'ArrowUp') choice = 'paper';
+    else if (keyPressed === 's' || keyPressed === 'ArrowRight') choice = 'scissors';
+    if (choice !== '') {
+        main(choice);
+        const option = document.querySelector(`.js-${choice}`);
+        option.classList.add('opt-button-highlight');
+        setTimeout(function () {option.classList.remove('opt-button-highlight')}, 100);
     }
 }
 
@@ -101,10 +100,10 @@ function reset() {
     };
     setScore(newScore);
     publishStats();
-    return newScore();
+    return newScore;
 }
 
-function main(userMove) {
+const main = function (userMove = generateComputerMove()) {
     const computerMove = generateComputerMove();
     const result = getResult(userMove, computerMove);
     let score = getScore();
@@ -114,6 +113,27 @@ function main(userMove) {
     publish(userMove, computerMove, result);
 }
 
+const autoplayButtonInit = () => {
+    playing = false;
+    interval = 0;
+    const autoplayButton = document.querySelector('.js-autoplay');
+    autoplayButton.addEventListener('click', () => {
+        if (!playing) {
+            interval = autoplay();
+            autoplayButton.innerText = 'Stop Playing';
+            autoplayButton.classList.add('reset');
+        }
+        else {
+            autoplayButton.innerText = 'Stop';
+            autoplayButton.classList.remove('reset');
+            clearInterval(interval);
+        }
+        playing = !playing;
+        function autoplay() {
+            return setInterval(main, 100);
+        }
+    });
+}
+
+autoplayButtonInit();
 publishStats();
-const inputField = document.querySelector('.opt-button');
-inputField.addEventListener('keydown', keyboardInput(event));

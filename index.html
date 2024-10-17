@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="icon" href="img/scissors-emoji.png">
     </head>
-    <body onkeydown="keyboardInput(event)">
+    <body">
         <header>
             <p class="heading">Rock Paper Scissors</p>
         </header>
@@ -26,12 +26,17 @@
             <p class="result js-result"></p>
             <p class="trial js-trial"></p>
             <p class="stats js-stats"></p>
-            <script src="scripts/rock-paper-scissors.js"></script>
-            <div class="button-wrapper">
+            <span class="button-wrapper">
                 <button class="reset-button js-reset-button" onclick="reset()">
                     Reset Score
                 </button>
-            </div>
+            </span>
+            <span class="button-wrapper">
+                <button class="reset-button js-autoplay">
+                    Auto Play
+                </button>
+            </span>
         </main>
+        <script src="scripts/rock-paper-scissors.js"></script>
     </body>
 </html>

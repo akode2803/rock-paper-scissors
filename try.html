@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor Follower</title>
+    <style>
+        /* Styling for the element that follows the cursor */
+        .cursor-follower {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            pointer-events: none; /* Prevents blocking clicks */
+            transition: transform 0.1s ease; /* Smooth follow effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-follower"></div>
+
+    <script>
+        const follower = document.querySelector('.cursor-follower');
+
+        // Add an event listener to track mouse movements
+        document.addEventListener('mousemove', (event) => {
+            // Update the position of the follower element to match the cursor
+            follower.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+        });
+    </script>
+</body>
+</html>
